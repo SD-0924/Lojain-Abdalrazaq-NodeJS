@@ -31,7 +31,7 @@ catch(err){
     console.error('Error reading the config file:', err);
 }
 
-// Iterating over all the files to count the number of words in each file
+// iterating over all the files to count the number of words in each file
 filePaths.forEach(filePath => {
 
     // checking if the file exists before reading
@@ -54,7 +54,7 @@ filePaths.forEach(filePath => {
             return;
         }
 
-        // Counting the number of words in the file
+        // counting the number of words in the file
         const wordCount = countWords(content);
         console.log(`${filePath}: ${wordCount} words`);
     });
