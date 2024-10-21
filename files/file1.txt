@@ -1,1 +1,3 @@
-Hello@@ %^$ Yes one two three# we
+Hello, this is a test!
+One two three four.
+Another line without special characters.

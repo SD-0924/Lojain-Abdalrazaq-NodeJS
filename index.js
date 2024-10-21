@@ -3,19 +3,20 @@ const fs = require('fs');
 let filePaths;
 
 function countWords(content) {
-    // removing special characters and trim the content
-    const cleanedContent = content.replace(/[^\w\s]/g, '').trim();
-    
-    // checking if cleaned content is empty after removing special characters
-    // this is to handle the case where the content contains only special characters and no words
-    if (cleanedContent.length === 0) {
-        return 0; // Return 0 for content with only special characters
+    let word_count = 0;
+    const regex = /[^A-Za-z0-9]/;  // Check for special characters
+
+    // trimming and split the content by whitespace -> the spcae, tab, newline, etc.
+    const words = content.trim().split(/\s+/);
+
+    // checking each word if it contains any special characters
+    for (let i = 0; i < words.length; i++) {
+        if (!regex.test(words[i])) {
+            word_count++;
+        }
     }
 
-    // splitting the content into words
-    const words = cleanedContent.split(/\s+/);
-    // filtering out the empty strings using the filter method
-    return words.filter(word => word.length > 0).length; // Count valid words
+    return word_count;
 }
 
 // reading the config file that contains the path of the files
@@ -37,7 +38,7 @@ filePaths.forEach(filePath => {
     // checking if the file exists before reading
     if (!fs.existsSync(filePath)) {
         console.error(`File does not exist: ${filePath}`);
-        return; // Exit early for non-existent files
+        return;
     }
 
     // reading each file asynchronously using fs.readFile method
